@@ -1,1 +1,1 @@
-# PytJICA
+# PyJICA
