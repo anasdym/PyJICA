@@ -35,14 +35,6 @@ def pobierz_wejscie():
             case _:
                 wykonaj_operacje(user_input)
 
-        # if user_input in ['exit', 'quit']:
-        #     break
-        # elif user_input == 'history':
-        #     for each in history:
-        #         print(each)
-        # else:
-        #     wykonaj_operacje(user_input)
-
 
 def wykonaj_operacje(user_input):
     try:
