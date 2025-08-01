@@ -1,12 +1,6 @@
-#https://mhyla.com/jica-python6/
+# zadanie https://mhyla.com/jica-python6/
 
 import random
-
-""""etap1
-city = input("Miasto? ")
-temp = input("Temperatura: ")
-print(f"Miasto: {city}, Temperatura: {temp}°C.")
-"""
 
 def generate(cities):
     
@@ -48,7 +42,7 @@ def generate(cities):
         print("- zapisano do raport.txt -")
     
 def main ():
-   cities = input("- napisz listę miast do prognozy - ")
+   cities = input("- napisz listę miast do prognozy -\n")
    cities = cities.split()
    generate(cities)
 

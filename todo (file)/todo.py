@@ -1,5 +1,6 @@
-zadania = []
+# zadanie https://mhyla.com/jica-python6/
 
+zadania = []
 
 def dodaj_zadanie():
    global zadanie
