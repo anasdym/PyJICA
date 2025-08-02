@@ -80,15 +80,13 @@ def main():
 
        force = TORQUE[round(eng_RPM / 250) - 2] * GEAR_RATIO[gear] * FINAL_DRIVE / WHEEL_RAD
        rolling_resistance = WEIGHT * 9.81 * 0.01 / math.sqrt(WHEEL_RAD * WHEEL_RAD + 0.01 * 0.01)
-       aero_drag = 0.5 * 1.2 * speed * speed * 2.61
+       aero_drag = 0.5 * 1.2 * speed * speed * 0.3 * 2.61
        acceletarion = (force - rolling_resistance - aero_drag) / WEIGHT
        if acceletarion < 0 :
            acceletarion = 0
        decceletarion = (rolling_resistance + aero_drag) / WEIGHT
 
-
        display()
-
 
        speedSurface = myfont.render("Speed: " + str(round(speed * 3.6)) + " km/h", True,(0,0,0))
        WIN.blit(speedSurface, (0,0)) # wyswietlinie z poz.
