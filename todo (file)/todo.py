@@ -8,7 +8,7 @@ def dodaj_zadanie():
     zadania[zadanie] = False
 
 def pokaz_zadania():
-    for i, (zadanie, status) in enumerate(zadania.items()): #wraca z numerem slownika
+    for i, (zadanie, status) in enumerate(zadania.items()): #нумерує dict
         if status:
             print(f"{i + 1}. {zadanie} [✔]")
         else:
@@ -17,9 +17,8 @@ def pokaz_zadania():
 def wykonaj_zadanie():
     n = int(input("Które zadanie jest już wykonane? - napisz numer: "))
     for i, [zadanie, _] in enumerate(zadania.items()):
-        if i == n - 1:
+        if n == i + 1:
             zadania[zadanie] = True
-
     pokaz_zadania()
 
 def usun_zadanie():
@@ -35,7 +34,7 @@ def main ():
         dodaj_zadanie()
 
         while True:
-            komenda = input("\nChcesz..\ndodać kolejne? - napisz TAK\noznaczyć jako wykonane - napisz ZROB\nusunąć zadanie? - napisz USUN\n")
+            komenda = input("\nChcesz..\n..dodać kolejne? - napisz TAK\n..oznaczyć jako wykonane? - napisz ZROB\n..usunąć zadanie? - napisz USUN\n")
             komenda = komenda.lower()
 
             match komenda:
