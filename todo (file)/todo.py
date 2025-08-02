@@ -15,20 +15,27 @@ def pokaz_zadania():
             print(f"{i + 1}. {zadanie} [ ]")
 
 def wykonaj_zadanie():
-    n = int(input("Które zadanie jest już wykonane? - napisz numer"))
-    #zaprogramowac oznaczenie
+    n = int(input("Które zadanie jest już wykonane? - napisz numer: "))
+    for i, [zadanie, _] in enumerate(zadania.items()):
+        if i == n - 1:
+            zadania[zadanie] = True
+
     pokaz_zadania()
 
 def usun_zadanie():
-    n = int(input("Które zadanie usunąć? - napisz numer"))
-    # zaprogramowac usuwanie
+    zadanie_usun = 0
+    n = int(input("Które zadanie usunąć? - napisz numer: "))
+    for i, [zadanie, _] in enumerate(zadania.items()):
+        if i == n - 1:
+            zadanie_usun = zadanie
+    zadania.pop(zadanie_usun)
     pokaz_zadania()
 
 def main ():
         dodaj_zadanie()
 
         while True:
-            komenda = input("\nChcesz..\ndodać kolejne? - napisz TAK\noznaczyć jako wykonane - napisz ZROB\nusunąć zadanie? - napisz USUN")
+            komenda = input("\nChcesz..\ndodać kolejne? - napisz TAK\noznaczyć jako wykonane - napisz ZROB\nusunąć zadanie? - napisz USUN\n")
             komenda = komenda.lower()
 
             match komenda:
