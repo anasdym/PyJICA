@@ -8,10 +8,10 @@ def generate(cities):
     tempsCity = {}
     raport = []
     
-    raport.append("- prognoza podody - ")
+    raport.append("- prognoza pogody - ")
     
     for city in cities:
-        temp = random.randint(-10, 35)
+        temp = random.uniform(-10, 35).__round__(2)
         cond = ["Słonecznie", "Deszczowo", "Zachmurzenie"]
         random.shuffle(cond)
         
@@ -37,7 +37,7 @@ def generate(cities):
     #---saving to file & ---
     with open("raport.txt", "a") as f:
         for i in raport:
-            f.write(i)
+            f.write(i + "\n")
             print(i)
         print("- zapisano do raport.txt -")
     
