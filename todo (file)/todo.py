@@ -1,7 +1,6 @@
 zadania = {}
 
 def dodaj_zadanie():
-    global zadanie
     tytul = input("Napisz tytuł zadania: ")
     priorytet = input("Napisz priorytet zadania: ")
     zadanie = (tytul, priorytet)
