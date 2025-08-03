@@ -11,7 +11,7 @@ def generate(cities):
     raport.append("- prognoza pogody - ")
     
     for city in cities:
-        temp = random.uniform(-10, 35).__round__(2)
+        temp = random.uniform(-10, 35).__round__(1)
         cond = ["Słonecznie", "Deszczowo", "Zachmurzenie"]
         random.shuffle(cond)
         
@@ -30,11 +30,10 @@ def generate(cities):
     city_min = [city for city, temp in tempsCity.items() if temp == temp_min][0]
     
     results = f"- analiza - \nSrednia temperatura: {temp_ave}°C. Maksymalna ({temp_max}°C) jest w {city_max}, a minimalna ({temp_min}°C) w {city_min}."
-    #---   
-       
+
     raport.append(results)
     
-    #---saving to file & ---
+    #---saving to file & print
     with open("raport.txt", "a") as f:
         for i in raport:
             f.write(i + "\n")

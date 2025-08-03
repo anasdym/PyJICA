@@ -5,21 +5,20 @@ def dodaj_zadanie():
     tytul = input("Napisz tytuł zadania: ")
     priorytet = input("Napisz priorytet zadania: ")
     zadanie = (tytul, priorytet)
-    zadania[zadanie] = False
+    zadania[zadanie] = "[ ]"
+    print("- zapisano! - ")
 
 def pokaz_zadania():
     for i, (zadanie, status) in enumerate(zadania.items()): #нумерує dict
-        if status:
-            print(f"{i + 1}. {zadanie} [✔]")
-        else:
-            print(f"{i + 1}. {zadanie} [ ]")
+        print(f"{i + 1}. {zadanie} {status}")
 
 def wykonaj_zadanie():
-    n = int(input("Które zadanie jest już wykonane? - napisz numer: "))
+    n = int(input("Które zadanie chcesz oznaczyć? - napisz numer: "))
     for i, [zadanie, _] in enumerate(zadania.items()):
         if n == i + 1:
-            zadania[zadanie] = True
+            zadania[zadanie] = "[✔]"
     pokaz_zadania()
+    print("- wykonane! - ")
 
 def usun_zadanie():
     zadanie_usun = 0
@@ -28,27 +27,40 @@ def usun_zadanie():
         if i == n - 1:
             zadanie_usun = zadanie
     zadania.pop(zadanie_usun)
+    print("- usunięte! - ")
+
+def zapisz_plik():
     pokaz_zadania()
+    with open("todo-history.txt", "a") as f:
+        for i, [zadanie, status] in enumerate(zadania.items()):
+            f.write(f"{i + 1}. {zadanie} {status}\n")
+    print("- zapisano do todo-history.txt -")
 
 def main ():
-        dodaj_zadanie()
 
-        while True:
-            komenda = input("\nChcesz..\n..dodać kolejne? - napisz TAK\n..oznaczyć jako wykonane? - napisz ZROB\n..usunąć zadanie? - napisz USUN\n")
-            komenda = komenda.lower()
+    dodaj_zadanie()
 
-            match komenda:
-                case "tak":
-                    dodaj_zadanie()
-                case "zrob":
-                    pokaz_zadania()
-                    wykonaj_zadanie()
-                case "usun":
-                    pokaz_zadania()
-                    usun_zadanie()
-                case _:
-                    pokaz_zadania()
-                    break
+    while True:
+        komenda = input("\nChcesz..\n..dodać zadanie? - napisz DODAJ\n..oznaczyć jako wykonane? - napisz ZROB\n..usunąć zadanie? - napisz USUN\n..pokazać wszyskie? - napisz LISTA\n..zapisać do pliku? - napisz SAVE\n..zakonczyć? - napisz EXIT\n")
+        komenda = komenda.lower()
+
+        match komenda:
+            case "dodaj":
+                dodaj_zadanie()
+            case "zrob":
+                pokaz_zadania()
+                wykonaj_zadanie()
+            case "usun":
+                pokaz_zadania()
+                usun_zadanie()
+            case "lista":
+                pokaz_zadania()
+            case "save":
+                zapisz_plik()
+            case "exit":
+                break
+            case _:
+                print("Nie poprawna komenda, spobój jeszcze raz\n")
 
 if __name__ == "__main__":
    main()
