@@ -34,7 +34,7 @@ def generate(cities):
     raport.append(results)
     
     #---saving to file & print
-    with open("raport.txt", "a") as f:
+    with open("raport.txt", "a", encoding='utf-8') as f:
         for i in raport:
             f.write(i + "\n")
             print(i)

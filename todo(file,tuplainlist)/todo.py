@@ -16,7 +16,6 @@ def wykonaj_zadanie():
     for i, [zadanie, _] in enumerate(zadania.items()):
         if n == i + 1:
             zadania[zadanie] = "[✔]"
-    pokaz_zadania()
     print("- wykonane! - ")
 
 def usun_zadanie():
