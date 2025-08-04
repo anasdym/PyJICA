@@ -1,11 +1,29 @@
 zadania = {}
 
 def dodaj_zadanie():
-    tytul = input("Napisz tytuł zadania: ")
-    priorytet = input("Napisz priorytet zadania: ")
-    zadanie = (tytul, priorytet)
-    zadania[zadanie] = "[ ]"
-    print("- zapisano! - ")
+    readFile = input("Chcesz dodać zadania z plika 'todo-history.txt'? - napisz LOAD\n")
+    if readFile.lower() == "load":
+        try:
+            with open('todo-history.txt', 'r', encoding='utf-8') as f:
+                for line in f:
+                    line.strip()
+                    line = line.split()
+                    print(line[1])
+                    print(line[2])
+                    print(line[3])
+                    print(line[4])
+                    zadanie = (line[1], line[2])
+                    zadania[zadanie] = line[3]
+                #print(zadania)
+        except FileNotFoundError:
+            print("Niema plika")
+            readFile = 0
+    else:
+        tytul = input("Napisz tytuł zadania: ")
+        priorytet = input("Napisz priorytet zadania: ")
+        zadanie = (tytul, priorytet)
+        zadania[zadanie] = "[ ]"
+        print("- zapisano! - ")
 
 def pokaz_zadania():
     for i, (zadanie, status) in enumerate(zadania.items()): #нумерує dict
@@ -30,13 +48,14 @@ def usun_zadanie():
 
 def zapisz_plik():
     pokaz_zadania()
-    with open("todo-history.txt", "a", encoding='utf-8') as f:
+    with open("todo-history.txt", "a") as f:
         for i, [zadanie, status] in enumerate(zadania.items()):
             f.write(f"{i + 1}. {zadanie} {status}\n")
     print("- zapisano do todo-history.txt -")
 
 def main ():
 
+    print("MENADGER ZADAŃ")
     dodaj_zadanie()
 
     while True:
