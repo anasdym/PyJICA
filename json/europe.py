@@ -27,7 +27,13 @@ def main():
 
         print("TOP-10:")
         for i in range(0,10):
-            print(f"{i+1}. {europe[i][0]} - capital: {europe[i][1]} - population: {europe[i][2]}")
+            print(f"{i+1}. {europe[i][0]} - capital: {europe[i][1]} - population: {europe[i][2]:,}")
+
+        for i in europe:
+            suma = 0
+            suma = suma + int(europe[i][2])
+        print(suma)
+
     else:
         print("Error ", response.status_code)
 
