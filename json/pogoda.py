@@ -2,6 +2,7 @@ import json
 from logging import exception
 import requests
 from requests import Response
+import pandas
 
 def getCoord(city):
 
@@ -44,40 +45,61 @@ def getWheather(latitude, longitude):
 
 def getCities():
 
-    user_data = input("Prosze o podanie miast w jednej linii, oddzielonych przecinkami\n")
-    user_cities = user_data.split(',')
+    while True:
 
-    cities = []
-    for i in user_cities:
-        city = i.strip()
-        if city:
-            cities.append(city)
+        user_data = input("Prosze o podanie miast w jednej linii, oddzielonych przecinkami\n")
+        user_cities = user_data.split(',')
 
-    if not cities:
-        print("Bład: miasta nie czytelne")
-        return None
-    else:
-        return cities
+        cities = []
+        for i in user_cities:
+            city = i.strip()
+            if city:
+                cities.append(city)
+
+        if not cities:
+            print("Bład: miasta nie czytelne")
+            break
+        else:
+            return cities
+            break
 
 def main():
+    while True:
 
-    cities = getCities()
+        cities = getCities()
+        forecast = {
+            'City': [],
+            'Temp [°C]': [],
+            'Wind [km/h]': []
+        }
 
-    for city in cities:
-        city_coord = getCoord(city)
-        if city_coord:
-            latitude, longitude = city_coord
-            print(city, latitude, longitude)
+        for city in cities:
+            city_coord = getCoord(city)
+            if city_coord:
+                latitude, longitude = city_coord
 
-            city_temp, city_wind = getWheather(latitude, longitude)
-            if city_temp:
-                print(f"{city_temp}°C, {city_wind} km/h")
+                city_temp, city_wind = getWheather(latitude, longitude)
+                if city_temp:
+                    # print(f"{city}, {city_temp}°C, {city_wind} km/h")
+
+                    forecast['City'].append(city)
+                    forecast['Temp [°C]'].append(city_temp)
+                    forecast['Wind [km/h]'].append(city_wind)
+                else:
+                    print(f"[WARN] Brak danych pogodowych: {city}")
+                    break
             else:
-                print(f"[WARN] Brak danych pogodowych: {city}")
-        else:
-            print(f"[WARN] Nie znaleziono miasta: {city}")
+                print(f"[WARN] Nie znaleziono miasta: {city}")
+                break
+
+        forecastTab = pandas.DataFrame(forecast).to_string(index=False)
+        if forecastTab:
+            print(forecastTab)
+            break
 
 if __name__ == '__main__':
     main()
+
+# Gdansk, Warsaw
 
 # https://mhyla.com/jica-python7/#mini-projekt-pogoda-dla-listy-miast--plan-krok%C3%B3w-z-wymaganiami

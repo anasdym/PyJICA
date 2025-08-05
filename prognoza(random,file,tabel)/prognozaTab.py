@@ -19,7 +19,7 @@ def generate(cities):
 
         cond = ["Słonecznie", "Deszczowo", "Zachmurzenie"]
         random.shuffle(cond)
-        prognoza['Warunki'].append(cond[0] )
+        prognoza['Warunki'].append(cond[0])
 
     prognozaTab = pd.DataFrame(prognoza)
     print(prognozaTab)
