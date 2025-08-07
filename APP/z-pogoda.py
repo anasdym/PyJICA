@@ -78,6 +78,6 @@ def root(city:str):
    except Exception as err:
        return {"error": f"Wystąpił błąd przy pobieraniu danych pogodowych: {err}"}
 
-# cd ./API/
+# cd ./api-pogoda/
 # uvicorn main:app --reload
 

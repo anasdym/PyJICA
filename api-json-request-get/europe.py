@@ -14,7 +14,7 @@ def getData():
         print(f"Brak internetu: {err}")
 
     except json.JSONDecodeError:
-        print("Bład: puste odpowiedzi z API.")
+        print("Bład: puste odpowiedzi z api-pogoda.")
 
 def main():
 
