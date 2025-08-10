@@ -22,11 +22,18 @@ app = FastAPI()
 
 @app.get("/ping")
 def ping():
-   return {"status": "api-pogoda is working!"}
+   return {"status": "api is working!"}
 
 @app.get("/animals")
 def get_animals():
    return animals
+
+@app.get("/animals/search")
+def search_animals(name: str = ""):
+    for animal in animals:
+        if animal["name"].lower().find(name.lower()) != -1:
+            return animal
+    raise HTTPException(status_code=404, detail="Not found")
 
 @app.get("/animals/{id}")
 def get_animals(id: int):
@@ -34,7 +41,6 @@ def get_animals(id: int):
        if animal["id"] == id:
            return animal
     raise HTTPException(status_code=404, detail="Not found")
-    raise HTTPException()
 
 @app.put("/animals/{id}")
 def update_animal_name(id: int, animal_update: AnimalNameUpdate):
@@ -68,6 +74,6 @@ def delete_animal(id: int):
            return animals
    raise HTTPException(status_code=404, detail="Not found")
 
-# cd .\api-pogoda\
+# cd .\app\
 # uvicorn main:app --reload
 
